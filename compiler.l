@@ -14,13 +14,14 @@ int inputLineNumber = 1;
 %option nounput
 
 %%
-\# {return COMMENT;}
-\= {return SET}
+test {return TEST;}
+\#* {return 0;}
+\= {return SET;}
 ; {return SEPERATE;}
 exit {return EXIT;}
 
--- {return DECREASE}
-\+\+ {return INCREASE}
+-- {return DECREASE;}
+\+\+ {return INCREASE;}
 - {return MINUS;}
 \+ {return PLUS;}
 \* {return TIMES;}
@@ -43,19 +44,18 @@ not {return NOT;}
 
 int {return INT;}
 float {return FLOAT;}
-bool {return BOOL};
+bool {return BOOL;}
 
 if {return IF;}
-then {return THEN:}
+then {return THEN;}
 else {return ELSE;}
 while {return WHILE;}
 do {return DO;}
 end {return END;}
-
-Wahr {yyval.bool=1; return BOOLVAL;}
-Falsch {yyval.bool=0; return BOOLVAL;}
-\-?[0-9]+\.[0-9]+ {yyval.floating=atof{yytext}; return FLOATVAL;}
-\-?[1-9][0-9]* {yyval.integer=ato{yytext}; return INTVAL;}
+Wahr {yyval.boolval=1; return BOOLVAL;}
+Falsch {yyval.boolval=0; return BOOLVAL;}
+\-?[0-9]+\.[0-9]+ {yyval.floating=atof(yytext); return FLOATVAL;}
+\-?[1-9][0-9]* {yyval.integer=atoi(yytext); return INTVAL;}
 [A-Za-z][A-Za-z0-9]* {yyval.character=strdup(yytext); return VAR;}
 
 %%
