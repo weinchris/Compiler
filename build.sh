@@ -1,9 +1,7 @@
 #!/bin/bash
 
-rm -rf bin
-rm -rf generated
-mkdir bin
-mkdir generated
+mkdir -f bin
+mkdir -f generated
 
 echo "Step 1 Bison Parser"
 bison -d compiler.y -b generated/compiler || { exit 1; }
