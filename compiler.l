@@ -15,6 +15,10 @@ int inputLineNumber = 1;
 
 %%
 \# {return COMMENT;}
+\= {return SET}
+; {return SEPERATE;}
+exit {return EXIT;}
+
 -- {return DECREASE}
 \+\+ {return INCREASE}
 - {return MINUS;}
@@ -37,8 +41,6 @@ not {return NOT;}
 \( {return OBR;}
 \) {return CBR;}
 
-\= {return SET}
-; {return SEPERATE;}
 int {return INT;}
 float {return FLOAT;}
 bool {return BOOL};
@@ -50,10 +52,10 @@ while {return WHILE;}
 do {return DO;}
 end {return END;}
 
-exit {return EXIT;}
-
-\-?[0-9]+\.[0-9]+ {yyval.floating=atof{yytext}; return FLOAT;}
-\-?[1-9][0-9]* {yyval.integer=ato{yytext}; return INT;}
+Wahr {yyval.bool=1; return BOOLVAL;}
+Falsch {yyval.bool=0; return BOOLVAL;}
+\-?[0-9]+\.[0-9]+ {yyval.floating=atof{yytext}; return FLOATVAL;}
+\-?[1-9][0-9]* {yyval.integer=ato{yytext}; return INTVAL;}
 [A-Za-z][A-Za-z0-9]* {yyval.character=strdup(yytext); return VAR;}
 
 %%
