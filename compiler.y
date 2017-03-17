@@ -33,9 +33,6 @@ extern int inputLineNumber;
 
 %%    // grammar rules
 
-test    :
-          TEST;
-
 %%
 
 //Epilogue
