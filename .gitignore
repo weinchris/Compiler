@@ -1,3 +1,2 @@
-*.tab.*
-generated*
-bin
+generated/
+bin/
