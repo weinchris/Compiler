@@ -1,5 +1,8 @@
 #!/bin/bash
 
+rm -rf bin
+mkdir bin
+
 echo "Step 1 Bison Parser"
 bison -d compiler.y -b generated/compiler || { exit 1; }
 

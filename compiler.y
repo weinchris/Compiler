@@ -1,10 +1,10 @@
 %{
 //Prologue
 
-#include "..\compiler.h"
-#include "..\symboltable.h"
-#include "..\generator.h"
-#include "..\interpreter.h"
+#include "../compiler.h"
+#include "../symboltable.h"
+#include "../generator.h"
+#include "../interpreter.h"
 #include <stdio.h>
 
 // Variable to track current line number  [defined in compiler.l]

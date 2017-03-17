@@ -1,7 +1,7 @@
 %{
 
-#include "..\compiler.h"
-#include "..\symboltable.h"
+#include "../compiler.h"
+#include "../symboltable.h"
 #include "compiler.tab.h"
 
 /**
