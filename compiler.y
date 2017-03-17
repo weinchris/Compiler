@@ -16,7 +16,20 @@ extern int inputLineNumber;
 %error-verbose
 
 // Define all tokens used in the scanner
-%token TEST IF
+%union {
+  char* character;
+	int integer;
+	double floating;
+  int bool;
+       }
+%token MINUS PLUS TIMES DIV MOD INCREASE DECREASE
+%token COMMENT SET SEPARATE EXIT
+%token SMALLEQ BIGEQ SMALL BIG EQ NOTEQ
+%token AND OR NOT
+%token INT FLOAT BOOL
+%token INTVAL FLOATVAL BOOLVAL VAR
+%token IF THEN ELSE WHILE DO END
+%token OBR CBR
 
 %%    // grammar rules
 
