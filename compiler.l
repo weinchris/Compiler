@@ -52,10 +52,10 @@ else {return ELSE;}
 while {return WHILE;}
 do {return DO;}
 end {return END;}
-Wahr {yyval.boolval=1; return BOOLVAL;}
-Falsch {yyval.boolval=0; return BOOLVAL;}
-\-?[0-9]+\.[0-9]+ {yyval.floating=atof(yytext); return FLOATVAL;}
-\-?[1-9][0-9]* {yyval.integer=atoi(yytext); return INTVAL;}
-[A-Za-z][A-Za-z0-9]* {yyval.character=strdup(yytext); return VAR;}
+Wahr {yylval.boolval=1; return BOOLVAL;}
+Falsch {yylval.boolval=0; return BOOLVAL;}
+\-?[0-9]+\.[0-9]+ {yylval.floating=atof(yytext); return FLOATVAL;}
+\-?[1-9][0-9]* {yylval.integer=atoi(yytext); return INTVAL;}
+[A-Za-z][A-Za-z0-9]* {yylval.character=strdup(yytext); return VAR;}
 
 %%
