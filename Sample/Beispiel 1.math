@@ -1,0 +1,10 @@
+int A = 3;
+int B = 2 * A;
+int C, D;
+C = A + B;
+if (C > A) then
+    D = A - 1;
+else
+    D = C * ++A;
+end;
+exit D;

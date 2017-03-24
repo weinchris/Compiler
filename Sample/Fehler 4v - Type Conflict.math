@@ -1,0 +1,4 @@
+float A;
+bool B, C;
+C = (2 >= B);
+exit A;

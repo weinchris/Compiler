@@ -1,0 +1,13 @@
+# This test file contains all features of MathDH.
+
+int B = 1;
+int A = 1;
+
+while (B < 5) do
+    B = B + 1;
+    while (A % B != 0) do
+        A  = A + 1;
+    end;
+end;
+
+exit B;

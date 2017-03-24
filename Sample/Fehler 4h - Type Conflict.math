@@ -1,0 +1,8 @@
+float A;
+A = 1.0;
+if (A) then
+    A = 3.0;
+else
+    A = 4.0;
+end;
+exit A;

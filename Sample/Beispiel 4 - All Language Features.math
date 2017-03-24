@@ -1,0 +1,70 @@
+# This test file contains all features of MathDH.
+
+# Integer operations
+int A, B = 3, C = ++B; # A= ,  B=4,  C=4
+++C;                   # A= ,  B=4,  C=5
+A = B;                 # A=4,  B=4,  C=5
+--B;                   # A=4,  B=3,  C=5
+C = A + C;             # A=4,  B=3,  C=7
+B = A - B;             # A=4,  B=1,  C=7
+++B;                   # A=4,  B=2,  C=7
+C = A * C;             # A=4,  B=2,  C=28
+C = A / B;             # A=4,  B=2,  C=2
+++B;                   # A=4,  B=3,  C=2
+C = A / B;             # A=4,  B=3,  C=1
+C = A % B;             # A=4,  B=3,  C=1
+B = B + -3;            # A=4,  B=0,  C=1
+
+# Float operations
+float D, E = 2.1, F = E * A;   # D=    , E=2.1 , F=8.4
+D = E + F;                     # D=10.5, E=2.1 , F=8.4
+D = D / E;                     # D=5.0,  E=2.1 , F=8.4
+F = D - E;                     # D=5.0,  E=2.1 , F=2.9
+
+# Boolean operations
+bool G, H, I = A > B;  # G= ,  H= ,  I=T
+#G = false;             # G=F,  H= ,  I=T
+G = C >= A;            # G=T,  H= ,  I=T
+H = B != B;            # G=T,  H=F,  I=T
+H = B <= B;            # G=T,  H=T,  I=T
+I = C < B;             # G=T,  H=T,  I=F
+G = A > B;             # G=T,  H=T,  I=F
+G = G and I;           # G=F,  H=T,  I=F
+H = G or H;            # G=F,  H=T,  I=F
+G = not G;             # G=T,  H=T,  I=F
+
+# Control Flow
+if (G) then            # TRUE
+    ++B;               # A=4,  B=1,  C=1
+end;
+
+if (not G) then        # FALSE
+    ++B;
+end;
+
+if (I) then            # FALSE
+    A = C + 3;
+else
+    A = A * A;         # A=16, B=1,  C=1
+end;
+
+while (B < E) do       # 1: TRUE, 2: TRUE, 3:FALSE
+    ++B;               # 1: B=2,    2: B=3
+    D = D * A;         # 1: D=80.0  2: D=1280.0
+end;
+
+# Nesting of flows
+if (A > B * 5) then           # TRUE
+    while (B < 5) do          # 1: TRUE     2: TRUE     3: FALSE
+        B = B + 1;            # 1: B=4      2: B=5
+        A = A + 2;            # 1: A=18     2: A=20
+        if (A % 10 == 0) then # 1: FALSE    2: TRUE
+            D = D - A;        #             2: D=1260.0
+            A = A + 10;       #             2: A=30
+        end;
+    end;
+else
+    ++A;
+end;
+
+exit (D / A);         # D=42.0

@@ -1,0 +1,5 @@
+int C;
+if (B > A) then
+    C = 3;
+end;
+exit B;

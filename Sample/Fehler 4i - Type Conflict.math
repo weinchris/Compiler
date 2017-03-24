@@ -1,0 +1,6 @@
+int A;
+A = 3;
+while (A) do
+    A = 4;
+end;
+exit A;

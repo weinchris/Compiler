@@ -1,0 +1,5 @@
+int A, C;
+while (B > C) do
+    A = C;
+end;
+exit C;

@@ -1,0 +1,4 @@
+float A;
+bool B;
+A = (A - B);
+exit A;

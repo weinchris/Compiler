@@ -1,0 +1,3 @@
+bool A;
+A = not 3;
+exit A;

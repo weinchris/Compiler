@@ -1,0 +1,2 @@
+float A = (2 > 1);
+exit A;

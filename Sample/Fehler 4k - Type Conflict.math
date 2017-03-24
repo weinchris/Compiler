@@ -1,0 +1,4 @@
+float A;
+A = 2.0;
+--A;
+exit A;

@@ -1,0 +1,4 @@
+float A;
+int B;
+A = (A % B);
+exit A;

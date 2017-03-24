@@ -1,0 +1,6 @@
+int A;
+A = 1;
+if (A) then
+    A = 3;
+end;
+exit A;

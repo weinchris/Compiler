@@ -1,0 +1,8 @@
+float A = 2.5;
+float B = 1.2;
+int C = 1;
+while (A > B) do
+	B = B * 1.5;
+	++C;
+end;
+exit B;
