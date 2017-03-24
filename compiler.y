@@ -26,21 +26,50 @@ extern int inputLineNumber;
        }
 %start S
 %token MINUS PLUS TIMES DIV MOD INCREASE DECREASE
-%token COMMENT SET SEPERATE EXIT
+%token COMMENT SET SEPERATE COM EXIT
 %token SMALLEQ BIGEQ SMALL BIG EQ NOTEQ
 %token AND OR NOT
 %token INT FLOAT BOOL
 %token INTVAL FLOATVAL BOOLVAL VAR
 %token IF THEN ELSE WHILE DO END
 %token OBR CBR
-%token TEST
 
 %type <character> VAR
 %type <integer> INTVAL
 %type <floating> FLOATVAL
 %type <boolval> BOOLVAL
 
+%left PLUS MINUS
+%left TIMES DIV
 
 %%    // grammar rules
-S:;
+
+S:  ID SET E SEPERATE S
+  | DECLERATE ID SET E SEPERATE S
+  | DECLERATE ID COM R
+  | DECLERATE ID
+  | IF BR THEN EL END
+  | WHILE BR DO S END
+  | INCREASE E SEPERATE
+  | DECREASE E SEPERATE;
+
+EL: S
+  | S ELSE S;
+
+R:  ID
+  | ID COM R;
+
+E:  E PLUS E
+  | E MINUS E
+  | E TIMES E
+  | E DIV E
+  | E MOD E
+  | INCREASE E
+  | DECREASE E
+  | E
+  | NUM
+  | ID;
+BR:  OBR E CBR
+   | OBR BR CBR;
+
 %%

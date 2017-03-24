@@ -31,4 +31,4 @@ echo "Step 5e Interpeter.o"
 gcc -g -c interpreter.c -o bin/interpreter.o || { exit 1; }
 
 echo "Step 6 Link result"
-gcc -g -o bin/compiler bin/compiler.o bin/symboltable.o bin/generator.o bin/optimizer.o bin/interpreter.o bin/compiler_y.o bin/lex.yy.o -lm -ll || { exit 1; }
+gcc -g -o bin/compiler bin/compiler.o bin/symboltable.o bin/generator.o bin/optimizer.o bin/interpreter.o bin/compiler_y.o bin/lex.yy.o -lm -lfl || { exit 1; }

@@ -14,10 +14,10 @@ int inputLineNumber = 1;
 %option nounput
 
 %%
-test {return TEST;}
-\#* {return 0;}
+#* {return 0;}
 \= {return SET;}
 ; {return SEPERATE;}
+, {return COM;}
 exit {return EXIT;}
 
 -- {return DECREASE;}
