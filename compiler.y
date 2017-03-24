@@ -24,6 +24,7 @@ extern int inputLineNumber;
 	double floating;
   int boolval;
        }
+%start S
 %token MINUS PLUS TIMES DIV MOD INCREASE DECREASE
 %token COMMENT SET SEPERATE EXIT
 %token SMALLEQ BIGEQ SMALL BIG EQ NOTEQ
@@ -41,15 +42,5 @@ extern int inputLineNumber;
 
 
 %%    // grammar rules
-
-  test:
-        TEST;
+S:;
 %%
-int main (int argc, char **argv) {
-	yyparse();
-	return 0;
-}
-void yyerror(char *message) {
-	printf("\nSomething went wrong\n");
-}
-//Epilogue
