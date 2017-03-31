@@ -48,8 +48,7 @@ extern int inputLineNumber;
 
 S:  VAR SET E SEPERATE S
   | DEC VAR SET E SEPERATE S
-  | DEC VAR COM R S
-  | DEC VAR S
+  | DEC R S
   | IF BR THEN EL END S
   | WHILE BR DO S END S
   | INCREASE E SEPERATE S
@@ -62,15 +61,19 @@ EL: S
 R:  VAR
   | VAR COM R;
 
-E:  E PLUS E
-  | E MINUS E
-  | E TIMES E
-  | E DIV E
-  | E MOD E
-  | INCREASE E
-  | DECREASE E
-  | NUM
-  | VAR;
+E:  ID PLUS E
+  | ID MINUS E
+  | ID TIMES E
+  | ID DIV E
+  | ID MOD E
+  | ID;
+
+
+
+ID: NUM
+  | VAR
+  | INCREASE ID
+  | DECREASE ID;
 
 BR:  OBR E CBR
    | OBR BR CBR;
