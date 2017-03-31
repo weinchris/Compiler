@@ -42,7 +42,9 @@ extern int inputLineNumber;
 %left AND OR
 %right NOT
 %left PLUS MINUS
-%left TIMES DIV
+%left TIMES DIV MOD
+%left EQ NOTEQ BIG BIGEQ SMALL SMALLEQ
+
 
 %%    // grammar rules
 
@@ -63,22 +65,33 @@ EL: S
 R:  VAR
   | VAR COM R;
 
-E:  ID PLUS E
-  | ID MINUS E
-  | ID TIMES E
-  | ID DIV E
-  | ID MOD E
+E:  ID OPS E
   | ID;
-
-
 
 ID: NUM
   | VAR
   | INCREASE ID
   | DECREASE ID;
 
-BR:  OBR E CBR
-   | OBR BR CBR;
+BR:  OBR E Z CBR;
+
+Z: BR
+  |;
+
+OPS: BIG
+  | BIGEQ
+  | SMALL
+  | SMALLEQ
+  | EQ
+  | NOTEQ
+  | PLUS
+  | MINUS
+  | TIMES
+  | DIV
+  | MOD
+  | NOT
+  | AND
+  | OR;
 
 DEC: INT
   | FLOAT
