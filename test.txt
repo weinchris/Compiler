@@ -1,0 +1,39 @@
+Beispiel 1.math
+Beispiel 2.math
+Beispiel 3 - Kommentare.math
+Beispiel 4 - All Language Features.math
+Beispiel 4B - All Language Features.math
+Beispiel 5 - Nested While.math
+Fehler 1 - Invalid Identifier.math
+Fehler 2a - Undeclared Variable.math
+Fehler 2b - Undeclared Variable.math
+Fehler 2c - Undeclared Variable.math
+Fehler 2d - Undeclared Variable.math
+Fehler 2e - Undeclared Variable.math
+Fehler 3a - Redeclared Variable.math
+Fehler 3b - Redeclared Variable.math
+Fehler 4a - Type Conflict.math
+Fehler 4b - Type Conflict.math
+Fehler 4c - Type Conflict.math
+Fehler 4d - Type Conflict.math
+Fehler 4e - Type Conflict.math
+Fehler 4f - Type Conflict.math
+Fehler 4g - Type Conflict.math
+Fehler 4h - Type Conflict.math
+Fehler 4i - Type Conflict.math
+Fehler 4j - Type Conflict.math
+Fehler 4k - Type Conflict.math
+Fehler 4l - Type Conflict.math
+Fehler 4m - Type Conflict.math
+Fehler 4n - Type Conflict.math
+Fehler 4o - Type Conflict.math
+Fehler 4p - Type Conflict.math
+Fehler 4q - Type Conflict.math
+Fehler 4r - Type Conflict.math
+Fehler 4s - Type Conflict.math
+Fehler 4t - Type Conflict.math
+Fehler 4u - Type Conflict.math
+Fehler 4v - Type Conflict.math
+Fehler 4w - Type Conflict.math
+Fehler 4x - Type Conflict.math
+Fehler 4y - Type Conflict.math
