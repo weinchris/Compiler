@@ -26,7 +26,7 @@ extern int inputLineNumber;
        }
 %start S
 %token MINUS PLUS TIMES DIV MOD INCREASE DECREASE
-%token COMMENT SET SEPERATE COM EXIT
+%token SET SEPERATE COM EXIT
 %token SMALLEQ BIGEQ SMALL BIG EQ NOTEQ
 %token AND OR NOT
 %token INT FLOAT BOOL
@@ -39,15 +39,17 @@ extern int inputLineNumber;
 %type <floating> FLOATVAL
 %type <boolval> BOOLVAL
 
+%left AND OR
+%right NOT
 %left PLUS MINUS
 %left TIMES DIV
 
 %%    // grammar rules
 
 S:  VAR SET E SEPERATE S
-  | DECLERATE VAR SET E SEPERATE S
-  | DECLERATE VAR COM R S
-  | DECLERATE VAR S
+  | DEC VAR SET E SEPERATE S
+  | DEC VAR COM R S
+  | DEC VAR S
   | IF BR THEN EL END S
   | WHILE BR DO S END S
   | INCREASE E SEPERATE S
@@ -67,14 +69,13 @@ E:  E PLUS E
   | E MOD E
   | INCREASE E
   | DECREASE E
-  | E
   | NUM
   | VAR;
 
 BR:  OBR E CBR
    | OBR BR CBR;
 
-DECLERATE: INT
+DEC: INT
   | FLOAT
   | BOOL;
 
