@@ -4,7 +4,7 @@
 #mkdir generated
 
 echo "Step 1 Bison Parser"
-bison -d compiler.y -b generated/compiler || { exit 1; }
+bison -vd compiler.y -b generated/compiler || { exit 1; }
 
 echo "Step 2 Flex Scanner"
 flex -o generated/lex.yy.c compiler.l || { exit 1; }
