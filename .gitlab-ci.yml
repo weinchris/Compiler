@@ -1,6 +1,6 @@
 image: debian:jessie
-  before_script:
-    - apt-get update -qq && apt-get install -y -qq bison flex gcc bash
-  script:
-    bash build.sh
-    bash testing.sh
+before_script:
+  - apt-get update -qq && apt-get install -y -qq bison flex gcc bash
+script:
+  bash build.sh
+  bash testing.sh
