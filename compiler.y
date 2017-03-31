@@ -50,17 +50,18 @@ extern int inputLineNumber;
 
 S:  VAR SET E SEPERATE S
   | DEC R X SEPERATE S
-  | IF BR THEN EL END S
-  | WHILE BR DO S END S
+  | IF BR THEN S EL END SEPERATE S
+  | WHILE BR DO S END SEPERATE S
   | INCREASE E SEPERATE S
   | DECREASE E SEPERATE S
-  | EN;
+  | EN
+  |;
 
 X: SET E
   |;
 
-EL: S
-  | S ELSE S;
+EL: ELSE S
+  |;
 
 R:  VAR
   | VAR COM R;
