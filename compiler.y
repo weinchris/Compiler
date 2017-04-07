@@ -23,6 +23,7 @@ extern int inputLineNumber;
 	int integer;
 	double floating;
   int boolval;
+  symbolTableEntry* tableEntry;
        }
 %start S
 %token MINUS PLUS TIMES DIV MOD INCREASE DECREASE
@@ -38,6 +39,8 @@ extern int inputLineNumber;
 %type <integer> INTVAL
 %type <floating> FLOATVAL
 %type <boolval> BOOLVAL
+
+%type <tableEntry> DEC
 
 %left AND OR
 %right NOT
@@ -94,9 +97,9 @@ OPS: BIG
   | AND
   | OR;
 
-DEC: INT
-  | FLOAT
-  | BOOL;
+DEC: INT {$$ = addEntryToSymbolTable(getName(), INTEGER, inputLineNumber);}
+  | FLOAT {$$ = addEntryToSymbolTable(getName(), REAL, inputLineNumber);}
+  | BOOL {$$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);};
 
 NUM: INTVAL
   | FLOATVAL

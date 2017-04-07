@@ -24,12 +24,12 @@ enum e_dataType
      * Integer numbers.
      */
     INTEGER,
-    
+
     /**
      * Floating point numbers.
      */
     REAL,
-    
+
     /**
      * Boolean values (<code>true</code> / <code>false</code>).
      */
@@ -50,19 +50,19 @@ struct s_symbolTableEntry
      * The name of the variable.
      */
     char* name;
-    
+
     /**
      * The type of the variable.
      */
     dataType type;
-    
+
     /**
      * Line number of the input file where the variable has been defined.
      * Note: This is used for output and debug purposes only. It has no effect
      *       on the symbol table itself.
      */
     int line;
-    
+
     /**
      * Pointer to the following entry of the symbol table.<BR>
      * This is supposed to be set to <code>null</code> for the last entry.
@@ -109,9 +109,11 @@ symbolTableEntry* addEntryToSymbolTable(char* name, dataType type, int line);
 symbolTableEntry* getEntryFromSymbolTable(char* name);
 
 /**
- * This writes the current symbol table into a text file called 
+ * This writes the current symbol table into a text file called
  * <code>1_symboltable</code>.
  **/
 void printSymbolTable();
+
+char* getName();
 
 #endif /*SYMBOLTABLE_H_*/

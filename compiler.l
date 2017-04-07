@@ -58,4 +58,6 @@ Falsch {yylval.boolval=0; return BOOLVAL;}
 \-?[1-9][0-9]* {yylval.integer=atoi(yytext); return INTVAL;}
 [A-Za-z][A-Za-z0-9]* {yylval.character=strdup(yytext); return VAR;}
 
+\n {++inputLineNumber;}
+
 %%

@@ -22,6 +22,8 @@ extern int debug;
  * [defined in file compiler.l]
  */
 extern int inputLineNumber;
+extern int nameNumber;
+
 
 /**
  * Pointer to the first entry of the symbol table.<BR>
@@ -82,21 +84,21 @@ symbolTableEntry* addEntryToSymbolTable(char* name, dataType type, int line)
                         "Invalid type given.");
         return 0;
     }
-    
+
     // Allocate required memory
     symbolTableEntry* newSymtabEntry = (symbolTableEntry*)
                                        malloc(sizeof(symbolTableEntry));
     newSymtabEntry->name = (char*) malloc(strlen(name) +1);
-    
+
     // Set fields
     // TODO - IMPLEMENTATION NEEDED
-    
+
     if (debug > 0)
     {
         printf("Adding new entry to symbol table: %s %s %d\n",
                name, getTypeName(type), line);
     }
-    
+
     // Assign as new symbol table for 1st entry
     if (!symbolTable)
     {
@@ -112,7 +114,7 @@ symbolTableEntry* addEntryToSymbolTable(char* name, dataType type, int line)
         }
         iterator->next = newSymtabEntry;
     }
-    
+
     return newSymtabEntry;
 }
 
@@ -129,20 +131,27 @@ symbolTableEntry* getEntryFromSymbolTable(char* name)
 {
     // Loop until all entries in the symbol table and check the name
     symbolTableEntry* iterator = symbolTable;
-    
+
     while ((iterator != 0) && (strcmp(iterator->name, name) != 0))
     {
         iterator = iterator->next;
     }
-    
+
     return iterator;
 }
 
 /**
- * This writes the current symbol table into a text file called 
+ * This writes the current symbol table into a text file called
  * <code>1_symboltable</code>.
  **/
 void printSymbolTable()
 {
     // TODO - IMPLEMENTATION NEEDED
+}
+
+char* getName()
+{
+  char number[5];
+  sprintf(number, "H%d", nameNumber);
+  return number;
 }
