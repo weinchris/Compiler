@@ -22,7 +22,6 @@ extern int debug;
  * [defined in file compiler.l]
  */
 extern int inputLineNumber;
-extern int nameNumber;
 
 
 /**
@@ -151,7 +150,7 @@ void printSymbolTable()
 
 char* getName()
 {
-  char number[5];
-  sprintf(number, "H%d", nameNumber);
+  char* number= malloc(sizeof(char)*10);
+  sprintf(number, "_H%d", inputLineNumber);
   return number;
 }

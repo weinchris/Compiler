@@ -24,6 +24,7 @@ extern int inputLineNumber;
 	double floating;
   int boolval;
   symbolTableEntry* tableEntry;
+  dataType daType;
        }
 %start S
 %token MINUS PLUS TIMES DIV MOD INCREASE DECREASE
@@ -40,7 +41,8 @@ extern int inputLineNumber;
 %type <floating> FLOATVAL
 %type <boolval> BOOLVAL
 
-%type <tableEntry> DEC
+
+%type <daType> TYPE DEC
 
 %left AND OR
 %right NOT
@@ -52,54 +54,50 @@ extern int inputLineNumber;
 %%    // grammar rules
 
 S:  VAR SET E SEPERATE S
-  | DEC R X SEPERATE S
+  | DEC SEPERATE S
   | IF BR THEN S EL END SEPERATE S
   | WHILE BR DO S END SEPERATE S
-  | INCREASE E SEPERATE S
-  | DECREASE E SEPERATE S
+  | E SEPERATE S
   | EN
   |;
 
-X: SET E
-  |;
 
 EL: ELSE S
   |;
 
-R:  VAR
-  | VAR COM R;
-
-E:  ID OPS E
-  | ID;
-
-ID: NUM
+E:  E BIG E
+  | E BIGEQ E
+  | E SMALL E
+  | E SMALLEQ E
+  | E EQ E
+  | E NOTEQ E
+  | E PLUS E
+  | E MINUS E
+  | E TIMES E
+  | E DIV E
+  | E MOD E
+  | E AND E
+  | E OR E
+  | E NOT E
+  | NUM
   | VAR
-  | INCREASE ID
-  | DECREASE ID;
+  | INCREASE NUM
+  | DECREASE NUM
+  | INCREASE VAR
+  | DECREASE VAR;
 
 BR:  OBR E Z CBR;
 
 Z: BR
   |;
 
-OPS: BIG
-  | BIGEQ
-  | SMALL
-  | SMALLEQ
-  | EQ
-  | NOTEQ
-  | PLUS
-  | MINUS
-  | TIMES
-  | DIV
-  | MOD
-  | NOT
-  | AND
-  | OR;
+DEC:  TYPE VAR {addEntryToSymbolTable($2, $1, inputLineNumber);}
+  | DEC COM VAR {addEntryToSymbolTable($3, $1, inputLineNumber);}
+  | DEC COM VAR SET E {addEntryToSymbolTable($3, $1, inputLineNumber);};
 
-DEC: INT {$$ = addEntryToSymbolTable(getName(), INTEGER, inputLineNumber);}
-  | FLOAT {$$ = addEntryToSymbolTable(getName(), REAL, inputLineNumber);}
-  | BOOL {$$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);};
+TYPE: INT {$$ = INTEGER;}
+  | FLOAT {$$ = REAL;}
+  | BOOL {$$ = BOOLEAN;};
 
 NUM: INTVAL
   | FLOATVAL
