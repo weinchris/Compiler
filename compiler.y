@@ -84,7 +84,7 @@ E:  E BIG E
   | INCREASE VAR
   | DECREASE VAR;
 
-BR:  OBR E Z CBR;
+BR: OBR E Z CBR;
 
 Z: BR
   |;
