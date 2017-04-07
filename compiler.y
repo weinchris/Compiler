@@ -57,10 +57,8 @@ S:  VAR SET E SEPERATE S
   | DEC SEPERATE S
   | IF BR THEN S EL END SEPERATE S
   | WHILE BR DO S END SEPERATE S
-  | E SEPERATE S
   | EN
   |;
-
 
 EL: ELSE S
   |;
@@ -92,6 +90,7 @@ Z: BR
   |;
 
 DEC:  TYPE VAR {addEntryToSymbolTable($2, $1, inputLineNumber);}
+  | TYPE VAR SET E {addEntryToSymbolTable($2, $1, inputLineNumber);}
   | DEC COM VAR {addEntryToSymbolTable($3, $1, inputLineNumber);}
   | DEC COM VAR SET E {addEntryToSymbolTable($3, $1, inputLineNumber);};
 
