@@ -14,7 +14,7 @@ int inputLineNumber = 1;
 %option nounput
 
 %%
-#* {return 0;}
+\#* {return 0;}
 \= {return SET;}
 ; {return SEPERATE;}
 , {return COM;}
