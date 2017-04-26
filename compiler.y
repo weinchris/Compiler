@@ -67,7 +67,8 @@ S:  VAR SET E SEPERATE S
 			fprintf(stderr, "Error adding immediate code for assignment. Line: %d\n", inputLineNumber);
 		}
 	}*/
-  | INC SEPERATE S
+  | INCREASE E SEPERATE S
+  | DECREASE E SEPERATE S
   | DEC SEPERATE S
   | IF BR THEN S EL END SEPERATE S
   | WHILE BR DO S END SEPERATE S
@@ -78,14 +79,104 @@ EL: ELSE S
   |;
 
 E:  E BIG E
+{
+      if ($1->type == BOOLEAN || $3->type == BOOLEAN)
+      {
+          if ($1->type == BOOLEAN)
+              fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == BOOLEAN)
+              fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+          YYABORT;
+      }
+      $$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+  }
   | E BIGEQ E
+  {
+		if ($1->type == BOOLEAN || $3->type == BOOLEAN)
+		{
+			if ($1->type == BOOLEAN)
+				fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+			if ($3->type == BOOLEAN)
+				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+			YYABORT;
+		}
+		$$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+	}
   | E SMALL E
+  {
+		if ($1->type == BOOLEAN || $3->type == BOOLEAN)
+		{
+			if ($1->type == BOOLEAN)
+				fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+			if ($3->type == BOOLEAN)
+				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+			YYABORT;
+		}
+		$$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+	}
   | E SMALLEQ E
-  | E EQ E
-  | E NOTEQ E
+  {
+		if ($1->type == BOOLEAN || $3->type == BOOLEAN)
+		{
+			if ($1->type == BOOLEAN)
+				fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+			if ($3->type == BOOLEAN)
+				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+			YYABORT;
+		}
+		$$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+	}
+  | E EQ E {$$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);}
+  | E NOTEQ E {$$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);}
   | E AND E
+  {
+      if (! ($1->type == BOOLEAN) || ! ($3->type == BOOLEAN))
+      {
+          if ($1->type == REAL)
+              fprintf(stderr, "%s is of type float. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == REAL)
+              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+          if ($1->type == INTEGER)
+              fprintf(stderr, "%s is of type integer. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == INTEGER)
+              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+          YYABORT;
+      }
+      $$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+  }
+
   | E OR E
+  {
+      if (! ($1->type == BOOLEAN) || ! ($3->type == BOOLEAN))
+      {
+          if ($1->type == REAL)
+              fprintf(stderr, "%s is of type float. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == REAL)
+              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+          if ($1->type == INTEGER)
+              fprintf(stderr, "%s is of type integer. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == INTEGER)
+              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+          YYABORT;
+      }
+      $$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+  }
   | E NOT E
+  {
+      if (! ($1->type == BOOLEAN) || ! ($3->type == BOOLEAN))
+      {
+          if ($1->type == REAL)
+              fprintf(stderr, "%s is of type float. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == REAL)
+              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+          if ($1->type == INTEGER)
+              fprintf(stderr, "%s is of type integer. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == INTEGER)
+              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+          YYABORT;
+      }
+      $$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+  }
   | E PLUS E
   {
 		if ($1->type == BOOLEAN || $3->type == BOOLEAN)
@@ -146,14 +237,16 @@ E:  E BIG E
       }
       $$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
   }
-  | NUM
+  | NUM {$$ = $1;}
   | VAR
-  | INC;
-INC:
-  | INCREASE NUM
-  | DECREASE NUM
-  | INCREASE VAR
-  | DECREASE VAR;
+  {
+      if (! getEntryFromSymbolTable(VAR))
+      {
+          fprintf(stderr, "%s does not exist. Line: %d\n", VAR, inputLineNumber);
+      } else $$ = (getEntryFromSymbolTable(VAR));
+  }
+  | INCREASE E { $$ = $2;}
+  | DECREASE E { $$ = $2;};
 
 BR: OBR E Z CBR;
 

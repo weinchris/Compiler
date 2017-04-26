@@ -90,7 +90,8 @@ symbolTableEntry* addEntryToSymbolTable(char* name, dataType type, int line)
     newSymtabEntry->name = (char*) malloc(strlen(name) +1);
     strcpy(newSymtabEntry->name,name);
     newSymtabEntry->type = type;
-    newSymtabEntry->line = line; 
+    newSymtabEntry->line = line;
+    newSymtabEntry->next = 0; 
     // Set fields
     // TODO - IMPLEMENTATION NEEDED
 
