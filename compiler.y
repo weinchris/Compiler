@@ -92,7 +92,7 @@ BR: OBR E Z CBR;
 Z: BR
   |;
 
-DEC:  TYPE VAR {addEntryToSymbolTable($2, $1, inputLineNumber);}
+DEC: TYPE VAR {addEntryToSymbolTable($2, $1, inputLineNumber);}
   | TYPE VAR SET E {addEntryToSymbolTable($2, $1, inputLineNumber);}
   | DEC COM VAR {addEntryToSymbolTable($3, $1, inputLineNumber);}
   | DEC COM VAR SET E {addEntryToSymbolTable($3, $1, inputLineNumber);};
@@ -101,9 +101,9 @@ TYPE: INT {$$ = INTEGER;}
   | FLOAT {$$ = REAL;}
   | BOOL {$$ = BOOLEAN;};
 
-NUM: INTVAL
-  | FLOATVAL
-  | BOOLVAL;
+NUM: INTVAL (addEntryToSymbolTable(helperVariableCounter, INTEGER, inputLineNumber))
+  | FLOATVAL (addEntryToVariableTable
+  | BOOLVAL (addEntryToVariableTable());
 
 EN: EXIT SEPERATE
   | EXIT VAR SEPERATE

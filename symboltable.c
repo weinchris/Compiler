@@ -88,7 +88,9 @@ symbolTableEntry* addEntryToSymbolTable(char* name, dataType type, int line)
     symbolTableEntry* newSymtabEntry = (symbolTableEntry*)
                                        malloc(sizeof(symbolTableEntry));
     newSymtabEntry->name = (char*) malloc(strlen(name) +1);
-
+    strcpy(newSymtabEntry->name,name);
+    newSymtabEntry->type = type;
+    newSymtabEntry->line = line; 
     // Set fields
     // TODO - IMPLEMENTATION NEEDED
 
@@ -146,6 +148,14 @@ symbolTableEntry* getEntryFromSymbolTable(char* name)
 void printSymbolTable()
 {
     // TODO - IMPLEMENTATION NEEDED
+    symbolTableEntry* iterator2 = symbolTable;
+    for (;iterator2->next;iterator2=iterator2->next)
+    {
+        printf("Eintrag: %s = %s in line %d\n",
+                iterator2->name,
+                getTypeName(iterator2->type),
+                iterator2->line);
+    }
 }
 
 char* getName()

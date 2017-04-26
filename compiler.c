@@ -30,6 +30,7 @@ int debug = 0;
 int main(void)
 {
     yyparse();
+    printSymbolTable();
     return 0;
 }
 
