@@ -43,6 +43,7 @@ extern int inputLineNumber;
 
 
 %type <daType> TYPE DEC
+%type <tableEntry> NUM E
 
 %left AND OR
 %right NOT
@@ -54,6 +55,18 @@ extern int inputLineNumber;
 %%    // grammar rules
 
 S:  VAR SET E SEPERATE S
+    /*{
+		symbolTableEntry *var = getEntryFromSymbolTable($1);
+		if (!var)
+		{
+			fprintf(stderr, "Variable not declared! Variable: %s, Line: %d\n", $1, inputLineNumber);
+			YYABORT;
+		}
+		if (!createCodeAssignment(var, $3, inputLineNumber))
+		{
+			fprintf(stderr, "Error adding immediate code for assignment. Line: %d\n", inputLineNumber);
+		}
+	}*/
   | INC SEPERATE S
   | DEC SEPERATE S
   | IF BR THEN S EL END SEPERATE S
@@ -71,6 +84,17 @@ E:  E BIG E
   | E EQ E
   | E NOTEQ E
   | E PLUS E
+  {
+		if ($1->type == BOOLEAN || $3->type == BOOLEAN)
+		{
+			if ($1->type == BOOLEAN)
+				fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+			if ($3->type == BOOLEAN)
+				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+			YYABORT;
+		}
+		$$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+	}
   | E MINUS E
   | E TIMES E
   | E DIV E
@@ -101,9 +125,9 @@ TYPE: INT {$$ = INTEGER;}
   | FLOAT {$$ = REAL;}
   | BOOL {$$ = BOOLEAN;};
 
-NUM: INTVAL {addEntryToSymbolTable(helperVariableCounter(), INTEGER, inputLineNumber)}
-  | FLOATVAL {addEntryToSymbolTable(helperVariableCounter(), FLOAT, inputLineNumber)}
-  | BOOLVAL {addEntryToSymbolTable(helperVariableCounter(), BOOL, inputLineNumber)};
+NUM: INTVAL {$$ = addEntryToSymbolTable(helperVariableCounter(), INTEGER, inputLineNumber);}
+  | FLOATVAL {$$ = addEntryToSymbolTable(helperVariableCounter(), REAL, inputLineNumber);}
+  | BOOLVAL {$$ = addEntryToSymbolTable(helperVariableCounter(), BOOLEAN, inputLineNumber);};
 
 EN: EXIT SEPERATE
   | EXIT VAR SEPERATE

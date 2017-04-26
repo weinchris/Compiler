@@ -30,4 +30,6 @@ void yyerror(char * str);
 
 char* helperVariableCounter();
 
+dataType getType(symbolTableEntry *firstEntry, symbolTableEntry *secondEntry);
+
 #endif /*COMPILER_H_*/

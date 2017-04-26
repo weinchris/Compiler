@@ -52,3 +52,15 @@ char* helperVariableCounter(){
   helperCounter++;
   return h;
 }
+dataType getType(symbolTableEntry *firstEntry, symbolTableEntry *secondEntry) {
+
+	if (firstEntry->type == BOOLEAN && secondEntry->type == BOOLEAN) {
+		return BOOLEAN;
+	}
+
+	if (firstEntry->type == INTEGER && secondEntry->type == INTEGER) {
+		return INTEGER;
+	}
+
+	return REAL;
+}
