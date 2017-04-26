@@ -14,7 +14,7 @@ int inputLineNumber = 1;
 %option nounput
 
 %%
-\#* {return 0;}
+\#* {}
 \= {return SET;}
 ; {return SEPERATE;}
 , {return COM;}
@@ -59,5 +59,6 @@ Falsch {yylval.boolval=0; return BOOLVAL;}
 [A-Za-z][A-Za-z0-9]* {yylval.character=strdup(yytext); return VAR;}
 
 \n {++inputLineNumber;}
+[ \t]  {}
 
 %%
