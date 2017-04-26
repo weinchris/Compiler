@@ -162,21 +162,17 @@ E:  E BIG E
       }
       $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
   }
-  | E NOT E
+  | NOT E
   {
-      if (! ($1->type == BOOLEAN) || ! ($3->type == BOOLEAN))
+      if ( $2->type != BOOLEAN)
       {
-          if ($1->type == REAL)
-              fprintf(stderr, "%s is of type float. Line: %d\n", $1->name, inputLineNumber);
-          if ($3->type == REAL)
-              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
-          if ($1->type == INTEGER)
-              fprintf(stderr, "%s is of type integer. Line: %d\n", $1->name, inputLineNumber);
-          if ($3->type == INTEGER)
-              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+          if ($2->type == REAL)
+              fprintf(stderr, "%s is of type float. Line: %d\n", $2->name, inputLineNumber);
+          if ($2->type == INTEGER)
+              fprintf(stderr, "%s is of type integer. Line: %d\n", $2->name, inputLineNumber);
           YYABORT;
       }
-      $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
+      $$ = addEntryToSymbolTable(getName(), $2->type, inputLineNumber);
   }
   | E PLUS E
   {

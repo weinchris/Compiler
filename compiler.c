@@ -22,7 +22,7 @@ int helperCounter;
  * Variable to enable/disable debug mode<BR>
  * Set to a value unequal to <code>0</code> to enable debug output
  */
-int debug = 1;
+int debug = 0;
 
 /**
  * Main application entry point.<BR>
