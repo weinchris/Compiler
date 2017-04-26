@@ -14,7 +14,7 @@ int inputLineNumber = 1;
 %option nounput
 
 %%
-\#* {}
+\#.* {}
 \= {return SET;}
 ; {return SEPERATE;}
 , {return COM;}
@@ -22,7 +22,7 @@ exit {return EXIT;}
 
 -- {return DECREASE;}
 \+\+ {return INCREASE;}
-- {return MINUS;}
+\- {return MINUS;}
 \+ {return PLUS;}
 \* {return TIMES;}
 \/ {return DIV;}
