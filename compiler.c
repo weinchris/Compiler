@@ -16,6 +16,7 @@
  * [defined in file compiler.l]
  */
 extern int inputLineNumber;
+int helperCounter;
 
 /**
  * Variable to enable/disable debug mode<BR>
@@ -43,4 +44,11 @@ void yyerror(char* str)
 {
     fprintf(stderr, "Error while parsing input file (Line: %d): %s\n",
             inputLineNumber, str);
+}
+
+char* helperVariableCounter(){
+  char* h = malloc(sizeof(char)*10);
+  sprintf(h, "_h%i", helperCounter);
+  helperCounter++;
+  return h;
 }
