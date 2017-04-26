@@ -54,6 +54,7 @@ extern int inputLineNumber;
 %%    // grammar rules
 
 S:  VAR SET E SEPERATE S
+  | INC SEPERATE S
   | DEC SEPERATE S
   | IF BR THEN S EL END SEPERATE S
   | WHILE BR DO S END SEPERATE S
@@ -79,6 +80,8 @@ E:  E BIG E
   | E NOT E
   | NUM
   | VAR
+  | INC;
+INC:
   | INCREASE NUM
   | DECREASE NUM
   | INCREASE VAR
