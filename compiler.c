@@ -22,7 +22,7 @@ int helperCounter;
  * Variable to enable/disable debug mode<BR>
  * Set to a value unequal to <code>0</code> to enable debug output
  */
-int debug = 0;
+int debug = 1;
 
 /**
  * Main application entry point.<BR>
@@ -47,10 +47,10 @@ void yyerror(char* str)
 }
 
 char* helperVariableCounter(){
-  char* h = malloc(sizeof(char)*10);
-  sprintf(h, "_h%i", helperCounter);
-  helperCounter++;
-  return h;
+    char* h = malloc(sizeof(char)*10);
+    sprintf(h, "_h%i", helperCounter);
+    helperCounter++;
+    return h;
 }
 dataType getType(symbolTableEntry *firstEntry, symbolTableEntry *secondEntry) {
 
