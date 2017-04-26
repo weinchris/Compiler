@@ -83,6 +83,9 @@ E:  E BIG E
   | E SMALLEQ E
   | E EQ E
   | E NOTEQ E
+  | E AND E
+  | E OR E
+  | E NOT E
   | E PLUS E
   {
 		if ($1->type == BOOLEAN || $3->type == BOOLEAN)
@@ -96,12 +99,53 @@ E:  E BIG E
 		$$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
 	}
   | E MINUS E
+  {
+      if ($1->type == BOOLEAN || $3->type == BOOLEAN)
+      {
+          if ($1->type == BOOLEAN)
+              fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == BOOLEAN)
+              fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+          YYABORT;
+      }
+      $$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+  }
   | E TIMES E
+  {
+      if ($1->type == BOOLEAN || $3->type == BOOLEAN)
+      {
+          if ($1->type == BOOLEAN)
+              fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == BOOLEAN)
+              fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+          YYABORT;
+      }
+      $$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+  }
   | E DIV E
+  {
+      if ($1->type == BOOLEAN || $3->type == BOOLEAN)
+      {
+          if ($1->type == BOOLEAN)
+              fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == BOOLEAN)
+              fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+          YYABORT;
+      }
+      $$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+  }
   | E MOD E
-  | E AND E
-  | E OR E
-  | E NOT E
+  {
+      if ($1->type == BOOLEAN || $3->type == BOOLEAN)
+      {
+          if ($1->type == BOOLEAN)
+              fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+          if ($3->type == BOOLEAN)
+              fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+          YYABORT;
+      }
+      $$ = addEntryToSymbolTable(helperVariableCounter(), getType($1, $3), inputLineNumber);
+  }
   | NUM
   | VAR
   | INC;
