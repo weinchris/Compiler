@@ -101,9 +101,9 @@ TYPE: INT {$$ = INTEGER;}
   | FLOAT {$$ = REAL;}
   | BOOL {$$ = BOOLEAN;};
 
-NUM: INTVAL (addEntryToSymbolTable(helperVariableCounter, INTEGER, inputLineNumber))
-  | FLOATVAL (addEntryToVariableTable
-  | BOOLVAL (addEntryToVariableTable());
+NUM: INTVAL {addEntryToSymbolTable(helperVariableCounter(), INTEGER, inputLineNumber)}
+  | FLOATVAL {addEntryToSymbolTable(helperVariableCounter(), FLOAT, inputLineNumber)}
+  | BOOLVAL {addEntryToSymbolTable(helperVariableCounter(), BOOL, inputLineNumber)};
 
 EN: EXIT SEPERATE
   | EXIT VAR SEPERATE
