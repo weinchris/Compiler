@@ -28,4 +28,6 @@ extern char *strdup(const char *s);
  */
 void yyerror(char * str);
 
+char* helperVariableCounter();
+
 #endif /*COMPILER_H_*/
