@@ -252,10 +252,25 @@ BR: OBR E Z CBR;
 Z: BR
   |;
 
-DEC: TYPE VAR {addEntryToSymbolTable($2, $1, inputLineNumber);}
-  | TYPE VAR SET E {addEntryToSymbolTable($2, $1, inputLineNumber);}
-  | DEC COM VAR {addEntryToSymbolTable($3, $1, inputLineNumber);}
-  | DEC COM VAR SET E {addEntryToSymbolTable($3, $1, inputLineNumber);};
+DEC: TYPE VAR {
+    addEntryToSymbolTable($2, $1, inputLineNumber);
+    $$ = $1;
+  }
+  | TYPE VAR SET E
+  {
+    addEntryToSymbolTable($2, $1, inputLineNumber);
+    $$ = $1;
+  }
+  | DEC COM VAR
+  {
+    addEntryToSymbolTable($3, $1, inputLineNumber);
+    $$ = $1;
+  }
+  | DEC COM VAR SET E
+  {
+    addEntryToSymbolTable($3, $1, inputLineNumber);
+    $$ = $1;
+  };
 
 TYPE: INT {$$ = INTEGER;}
   | FLOAT {$$ = REAL;}
