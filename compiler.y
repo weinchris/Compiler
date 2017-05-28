@@ -256,7 +256,11 @@ DEC: TYPE VAR
     {
         fprintf(stderr, "%s already exists. Line: %d\n", $2, inputLineNumber);
         YYABORT;
-    } else $$ = addEntryToSymbolTable($2, $1, inputLineNumber);
+    } else if(hasTypeConflict($1,$4->type)){
+      fprintf(stderr, "%s has type conflict. Line: %d\n", $2, inputLineNumber);
+      YYABORT;
+    }
+    else $$ = addEntryToSymbolTable($2, $1, inputLineNumber);
   }
   | DEC COM VAR
   {
@@ -272,7 +276,11 @@ DEC: TYPE VAR
     {
         fprintf(stderr, "%s already exists. Line: %d\n", $3, inputLineNumber);
         YYABORT;
-    } else $$ = addEntryToSymbolTable($3, $1->type, inputLineNumber);
+    } else if(hasTypeConflict($1->type, $5->type)){
+      fprintf(stderr, "%s has type conflict. Line: %d\n", $3, inputLineNumber);
+      YYABORT;
+    }
+    else $$ = addEntryToSymbolTable($3, $1->type, inputLineNumber);
   };
 
 TYPE: INT {$$ = INTEGER;}

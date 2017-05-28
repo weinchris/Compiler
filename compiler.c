@@ -64,3 +64,29 @@ dataType getType(symbolTableEntry *firstEntry, symbolTableEntry *secondEntry) {
 
 	return REAL;
 }
+
+int hasTypeConflict(dataType firstEntry, dataType secondEntry){
+    switch (firstEntry) {
+      case REAL:
+      if (secondEntry==BOOLEAN) {
+        printf("REAL");
+        return 1;
+      }
+      break;
+      case INTEGER:
+      if (secondEntry==BOOLEAN || secondEntry==REAL) {
+        printf("INT");
+        return 1;
+      }
+      break;
+      case BOOLEAN:
+      if (secondEntry==REAL || secondEntry==INTEGER) {
+        printf("BOOL");
+        return 1;
+      }
+      break;
+
+      return 0;
+    }
+
+}
