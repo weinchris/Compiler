@@ -148,7 +148,7 @@ symbolTableEntry* getEntryFromSymbolTable(char* name)
  **/
 void printSymbolTable()
 {
-    // TODO - IMPLEMENTATION NEEDED
+    printf("== Begin Symbol Table ==\n");
     symbolTableEntry* iterator2 = symbolTable;
     for (;iterator2->next;iterator2=iterator2->next)
     {
@@ -157,6 +157,7 @@ void printSymbolTable()
                 getTypeName(iterator2->type),
                 iterator2->line);
     }
+    printf("== End Symbol Table ==\n");
 }
 
 char* getName()
