@@ -27,6 +27,7 @@ extern int inputLineNumber;
   dataType daType;
        }
 %start S
+
 %token MINUS PLUS TIMES DIV MOD INCREASE DECREASE
 %token SET SEPERATE COM EXIT
 %token SMALLEQ BIGEQ SMALL BIG EQ NOTEQ
@@ -37,11 +38,6 @@ extern int inputLineNumber;
 %token OBR CBR
 
 %type <character> VAR
-%type <integer> INTVAL
-%type <floating> FLOATVAL
-%type <boolval> BOOLVAL
-
-
 %type <daType> TYPE
 %type <tableEntry> NUM E DEC
 
