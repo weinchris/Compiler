@@ -51,19 +51,13 @@ extern int inputLineNumber;
 %%    // grammar rules
 
 S:  VAR SET E SEPERATE S
+  {
+    if (! getEntryFromSymbolTable($1))
     {
-		symbolTableEntry *var = getEntryFromSymbolTable($1);
-		if (!var)
-		{
-			fprintf(stderr, "Variable not declared! Variable: %s, Line: %d\n", $1, inputLineNumber);
-			YYABORT;
-		}
-		if (!createCodeAssignment(var, $3, inputLineNumber))
-		{
-			fprintf(stderr, "Error adding immediate code for assignment. Line: %d\n", inputLineNumber);
-            YYABORT;
-		}
-	}
+        fprintf(stderr, "%s does not exist. Line: %d\n", $1, inputLineNumber);
+        YYABORT;
+    }
+  }
   | INCREASE E SEPERATE S
   | DECREASE E SEPERATE S
   | DEC SEPERATE S
@@ -248,10 +242,38 @@ BR: OBR E Z CBR;
 Z: BR
   |;
 
-DEC: TYPE VAR {$$ = addEntryToSymbolTable($2, $1, inputLineNumber);}
-  | TYPE VAR SET E {$$ = addEntryToSymbolTable($2, $1, inputLineNumber);}
-  | DEC COM VAR {$$ = addEntryToSymbolTable($3, $1->type, inputLineNumber);}
-  | DEC COM VAR SET E {$$ = addEntryToSymbolTable($3, $1->type, inputLineNumber);};
+DEC: TYPE VAR
+  {
+      if (getEntryFromSymbolTable($2))
+      {
+          fprintf(stderr, "%s already exists. Line: %d\n", $2, inputLineNumber);
+          YYABORT;
+      } else $$ = addEntryToSymbolTable($2, $1, inputLineNumber);
+  }
+  | TYPE VAR SET E
+  {
+    if (getEntryFromSymbolTable($2))
+    {
+        fprintf(stderr, "%s already exists. Line: %d\n", $2, inputLineNumber);
+        YYABORT;
+    } else $$ = addEntryToSymbolTable($2, $1, inputLineNumber);
+  }
+  | DEC COM VAR
+  {
+    if (getEntryFromSymbolTable($3))
+    {
+        fprintf(stderr, "%s already exists. Line: %d\n", $3, inputLineNumber);
+        YYABORT;
+    } else $$ = addEntryToSymbolTable($3, $1->type, inputLineNumber);
+  }
+  | DEC COM VAR SET E
+  {
+    if (getEntryFromSymbolTable($3))
+    {
+        fprintf(stderr, "%s already exists. Line: %d\n", $3, inputLineNumber);
+        YYABORT;
+    } else $$ = addEntryToSymbolTable($3, $1->type, inputLineNumber);
+  };
 
 TYPE: INT {$$ = INTEGER;}
   | FLOAT {$$ = REAL;}
@@ -263,6 +285,13 @@ NUM: INTVAL {$$ = addEntryToSymbolTable(getName(), INTEGER, inputLineNumber);}
 
 EN: EXIT SEPERATE
   | EXIT VAR SEPERATE
+  {
+      if (! getEntryFromSymbolTable($2))
+      {
+          fprintf(stderr, "%s does not exist. Line: %d\n", $2, inputLineNumber);
+          YYABORT;
+      }
+  }
   | EXIT BR SEPERATE;
 
 %%
