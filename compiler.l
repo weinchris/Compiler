@@ -61,4 +61,6 @@ false {yylval.boolval=0; return BOOLVAL;}
 \n {++inputLineNumber;}
 [ \t]  {}
 
+.  { printf("Invalid identifier. Line: %d \n", inputLineNumber); yyerror;}
+
 %%
