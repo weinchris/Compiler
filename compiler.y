@@ -42,8 +42,8 @@ extern int inputLineNumber;
 %type <boolval> BOOLVAL
 
 
-%type <daType> TYPE DEC
-%type <tableEntry> NUM E
+%type <daType> TYPE
+%type <tableEntry> NUM E DEC
 
 %left AND OR
 %right NOT
@@ -252,25 +252,10 @@ BR: OBR E Z CBR;
 Z: BR
   |;
 
-DEC: TYPE VAR {
-    addEntryToSymbolTable($2, $1, inputLineNumber);
-    $$ = $1;
-  }
-  | TYPE VAR SET E
-  {
-    addEntryToSymbolTable($2, $1, inputLineNumber);
-    $$ = $1;
-  }
-  | DEC COM VAR
-  {
-    addEntryToSymbolTable($3, $1, inputLineNumber);
-    $$ = $1;
-  }
-  | DEC COM VAR SET E
-  {
-    addEntryToSymbolTable($3, $1, inputLineNumber);
-    $$ = $1;
-  };
+DEC: TYPE VAR {$$ = addEntryToSymbolTable($2, $1, inputLineNumber);}
+  | TYPE VAR SET E {$$ = addEntryToSymbolTable($2, $1, inputLineNumber);}
+  | DEC COM VAR {$$ = addEntryToSymbolTable($3, $1->type, inputLineNumber);}
+  | DEC COM VAR SET E {$$ = addEntryToSymbolTable($3, $1->type, inputLineNumber);};
 
 TYPE: INT {$$ = INTEGER;}
   | FLOAT {$$ = REAL;}
