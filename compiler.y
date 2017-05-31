@@ -92,7 +92,7 @@ E:  E BIG E
               fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
           YYABORT;
       }
-      $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
+      $$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
   }
   | E BIGEQ E
   {
@@ -104,7 +104,7 @@ E:  E BIG E
 				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
 			YYABORT;
 		}
-		$$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
+		$$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
 	}
   | E SMALL E
   {
@@ -116,7 +116,7 @@ E:  E BIG E
 				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
 			YYABORT;
 		}
-		$$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
+		$$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
 	}
   | E SMALLEQ E
   {
@@ -128,10 +128,10 @@ E:  E BIG E
 				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
 			YYABORT;
 		}
-		$$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
+		$$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
 	}
-  | E EQ E { $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);}
-  | E NOTEQ E { $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);}
+  | E EQ E { $$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);}
+  | E NOTEQ E { $$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);}
   | E AND E
   {
       if (! ($1->type == BOOLEAN) || ! ($3->type == BOOLEAN))
@@ -146,7 +146,7 @@ E:  E BIG E
               fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
           YYABORT;
       }
-      $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
+      $$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
   }
 
   | E OR E
@@ -163,7 +163,7 @@ E:  E BIG E
               fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
           YYABORT;
       }
-      $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
+      $$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
   }
   | NOT E
   {
@@ -175,7 +175,7 @@ E:  E BIG E
               fprintf(stderr, "%s is of type integer. Line: %d\n", $2->name, inputLineNumber);
           YYABORT;
       }
-      $$ = addEntryToSymbolTable(getName(), $2->type, inputLineNumber);
+      $$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
   }
   | E PLUS E
   {
