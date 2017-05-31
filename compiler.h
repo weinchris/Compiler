@@ -32,4 +32,6 @@ char* helperVariableCounter();
 
 dataType getType(symbolTableEntry *firstEntry, symbolTableEntry *secondEntry);
 
+int hasTypeConflict(dataType firstEntry, dataType secondEntry);
+
 #endif /*COMPILER_H_*/
