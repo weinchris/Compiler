@@ -693,51 +693,50 @@ void runCodeEntry(codeEntry* iterator, FILE *f, char* indent)
                     break;
             }
             break;
-        
+
         /* Constants */
         case OP_INT_CONSTANT:
             fprintf(f, "%s := %d", iterator->target->name, iterator->integer);
             fprintf(f, "\n");
-            
+
             if (val_target == 0)
             {
                 val_target = addEntryToVariableTable(iterator->target);
             }
-            
+
             val_target->value.intValue = iterator->integer;
             break;
-        
+
         case OP_FLOAT_CONSTANT:
             fprintf(f, "%s := %.2f", iterator->target->name, iterator->real);
             fprintf(f, "\n");
-            
+
             if (val_target == 0)
             {
                 val_target = addEntryToVariableTable(iterator->target);
             }
-            
+
             val_target->value.floatValue = iterator->real;
             break;
-        
+
         case OP_BOOL_CONSTANT:
             fprintf(f, "%s := %s", iterator->target->name,
                     getBooleanValue(iterator->boolean));
             fprintf(f, "\n");
-            
+
             if (val_target == 0)
             {
                 val_target = addEntryToVariableTable(iterator->target);
             }
-            
+
             val_target->value.boolValue = iterator->boolean;
             break;
-        
+
         /* Place holder for if/else/while */
         case OP_NOP:
             return;
-        
+
         default:
-            fprintf(f, "ERROR: Unexpected operation: %s",
-                       iterator->op);
+            fprintf(f, "ERROR: Unexpected operation: %u",iterator->op);
     }
 }

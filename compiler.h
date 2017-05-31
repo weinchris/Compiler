@@ -26,7 +26,7 @@ extern char *strdup(const char *s);
  * parsing the input data (e.g. syntax error).
  * @param str The error message to be printed.
  */
-void yyerror(char * str);
+void yyerror(const char* str);
 
 char* helperVariableCounter();
 

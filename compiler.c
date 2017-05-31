@@ -40,9 +40,9 @@ int main(void)
  * parsing the input data (e.g. syntax error).
  * @param str The error message to be printed.
  */
-void yyerror(char* str)
+void yyerror(const char* str)
 {
-    fprintf(stderr, "Error while parsing input file (Line: %d): %s\n",
+    fprintf(stderr, "Error while parsing input file (Line: %d): %s\n",\
             inputLineNumber, str);
 }
 

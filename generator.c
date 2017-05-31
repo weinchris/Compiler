@@ -112,7 +112,7 @@ codeEntry* createCodeEntry(int sourceLine, operation op,
 {
     // Allocate required memory
     codeEntry* newCodeEntry = (codeEntry*) malloc(sizeof(codeEntry));
-    
+
     // Set fields
     newCodeEntry->sourceLine = sourceLine;
     newCodeEntry->op = op;
@@ -125,7 +125,7 @@ codeEntry* createCodeEntry(int sourceLine, operation op,
     newCodeEntry->sub_1 = 0;
     newCodeEntry->sub_2 = 0;
     newCodeEntry->next = 0;
-    
+
     return newCodeEntry;
 }
 
@@ -1052,110 +1052,109 @@ void printCodeEntry(codeEntry* iterator)
             sprintf(codeSnippet, "IF %s GOTO %d", iterator->operand1->name,
                     startLineNumber + 2);
             appendPrintCodeEntry(codeSnippet, iterator->sourceLine);
-            
+
             codeSnippet = (char*)malloc(sizeof(char) * 100);
             sprintf(codeSnippet, "GOTO [LINE AFTER WHILE BODY]");
             codePrintEntry* entryFalse =
                 appendPrintCodeEntry(codeSnippet, iterator->sourceLine);
-            
+
             // Print all sub code
             iterator2 = iterator->sub_1;
-            
+
             while (iterator2 != 0)
             {
                 printCodeEntry(iterator2);
                 iterator2 = iterator2->next;
             }
-            
+
             codeSnippet = (char*)malloc(sizeof(char) * 100);
             sprintf(codeSnippet, "GOTO %d", lastWhileMarkerCodeLineLocal);
             appendPrintCodeEntry(codeSnippet, iterator->sourceLine);
-            
+
             // Backpatch the GOTO target for the false part
             // to the line after the while body
             sprintf(entryFalse->code, "GOTO %d", codeLineNumber + 1);
-            
+
             // Ignore the general handling below
             return;
-        
+
         case OP_MARKER_WHILE:
             // Remember current position
             lastWhileMarkerCodeLine = codeLineNumber + 1;
-            
+
             // Ignore the general handling below
             return;
-        
+
         case OP_EXIT:
             sprintf(codeSnippet, "RETURN %s", iterator->operand1->name);
             break;
-        
+
         /* Mathematical Operators */
         case OP_PLUS:
             sprintf(codeSnippet, "%s := %s + %s", iterator->target->name,
                     iterator->operand1->name, iterator->operand2->name);
             break;
-        
+
         case OP_MINUS:
             sprintf(codeSnippet, "%s := %s - %s", iterator->target->name,
                     iterator->operand1->name, iterator->operand2->name);
             break;
-        
+
         case OP_MULTIPLY:
             sprintf(codeSnippet, "%s := %s * %s", iterator->target->name,
                     iterator->operand1->name, iterator->operand2->name);
             break;
-        
+
         case OP_DIVIDE:
             sprintf(codeSnippet, "%s := %s / %s", iterator->target->name,
                     iterator->operand1->name, iterator->operand2->name);
             break;
-        
+
         case OP_MODULO:
             sprintf(codeSnippet, "%s := %s %% %s", iterator->target->name,
                     iterator->operand1->name, iterator->operand2->name);
             break;
-        
+
         case OP_INCREMENT:
             sprintf(codeSnippet, "%s := %s + 1", iterator->target->name,
                     iterator->target->name);
             break;
-        
+
         case OP_DECREMENT:
             sprintf(codeSnippet, "%s := %s - 1", iterator->target->name,
                     iterator->target->name);
             break;
-        
+
         /* Assignment */
         case OP_ASSIGN:
             sprintf(codeSnippet, "%s := %s", iterator->target->name,
                     iterator->operand1->name);
             break;
-        
+
         /* Numeric constants */
         case OP_INT_CONSTANT:
             sprintf(codeSnippet, "%s := %d", iterator->target->name,
                     iterator->integer);
             break;
-        
+
         case OP_FLOAT_CONSTANT:
             sprintf(codeSnippet, "%s := %.2f", iterator->target->name,
                     iterator->real);
             break;
-        
+
         case OP_BOOL_CONSTANT:
             sprintf(codeSnippet, "%s := %s", iterator->target->name,
                     getBooleanValue(iterator->boolean));
             break;
-        
+
         /* Place holder for if/else/while */
         case OP_NOP:
             return;
-        
+
         default:
-            sprintf(codeSnippet, "ERROR: Unexpected operation: %s",
-                                 iterator->op);
+            sprintf(codeSnippet, "ERROR: Unexpected operation: %u",iterator->op);
     }
-    
+
     appendPrintCodeEntry(codeSnippet, iterator->sourceLine);
 }
 

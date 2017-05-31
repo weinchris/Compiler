@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 int main(int argc, char **argv);
-void yyerror(char *message);
+void yyerror(const char* message);
 // Variable to track current line number  [defined in compiler.l]
 extern int inputLineNumber;
 
@@ -42,7 +42,7 @@ extern int inputLineNumber;
 %type <tableEntry> NUM E DEC
 
 %left AND OR
-%right NOT
+%right NOT INCREASE DECREASE
 %left PLUS MINUS
 %left TIMES DIV MOD
 %left EQ NOTEQ BIG BIGEQ SMALL SMALLEQ
