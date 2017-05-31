@@ -62,8 +62,8 @@ S:  VAR SET E SEPERATE S
       YYABORT;
     }
   }
-  | INCREASE E SEPERATE S
-  | DECREASE E SEPERATE S
+  | INCREASE E SEPERATE S {if($2->type!=INTEGER){fprintf(stderr, "Can only increment integer values. Line: %d\n", inputLineNumber);YYABORT;}}
+  | DECREASE E SEPERATE S {if($2->type!=INTEGER){fprintf(stderr, "Can only decrement integer values. Line: %d\n", inputLineNumber);YYABORT;}}
   | DEC SEPERATE S
   | IF BR THEN S EL END SEPERATE S
   {
@@ -248,8 +248,19 @@ E:  E BIG E
           YYABORT;
       } else $$ = (getEntryFromSymbolTable($1));
   }
-  | INCREASE E { $$ = $2;}
-  | DECREASE E { $$ = $2;};
+  | INCREASE E
+  { if($2->type!=INTEGER){
+    fprintf(stderr, "Can only increment integer values. Line: %d\n", inputLineNumber);YYABORT;}
+    else{
+    $$ = $2++;
+  }
+  }
+  | DECREASE E
+  {
+    if($2->type!=INTEGER){
+      fprintf(stderr, "Can only decrement integer values. Line: %d\n", inputLineNumber);YYABORT;}
+      else{$$ = $2--;}
+  };
 
 BR: OBR E Z CBR {$$=$2->type;};
 
