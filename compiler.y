@@ -43,9 +43,10 @@ extern int inputLineNumber;
 
 %left AND OR
 %right NOT INCREASE DECREASE
+
+%left EQ NOTEQ BIG BIGEQ SMALL SMALLEQ
 %left PLUS MINUS
 %left TIMES DIV MOD
-%left EQ NOTEQ BIG BIGEQ SMALL SMALLEQ
 
 
 %%    // grammar rules
@@ -87,9 +88,9 @@ E:  E BIG E
       if ($1->type == BOOLEAN || $3->type == BOOLEAN)
       {
           if ($1->type == BOOLEAN)
-              fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+              fprintf(stderr, "%s is of type boolean. Must be number for comparison. Line: %d\n", $1->name, inputLineNumber);
           if ($3->type == BOOLEAN)
-              fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+              fprintf(stderr, "%s is of type boolean. Must be number for comparison. Line: %d\n", $3->name, inputLineNumber);
           YYABORT;
       }
       $$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
@@ -99,9 +100,9 @@ E:  E BIG E
 		if ($1->type == BOOLEAN || $3->type == BOOLEAN)
 		{
 			if ($1->type == BOOLEAN)
-				fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+				fprintf(stderr, "%s is of type boolean. Must be number for comparison. Line: %d\n", $1->name, inputLineNumber);
 			if ($3->type == BOOLEAN)
-				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+				fprintf(stderr, "%s is of type boolean. Must be number for comparison. Line: %d\n", $3->name, inputLineNumber);
 			YYABORT;
 		}
 		$$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
@@ -111,9 +112,9 @@ E:  E BIG E
 		if ($1->type == BOOLEAN || $3->type == BOOLEAN)
 		{
 			if ($1->type == BOOLEAN)
-				fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+				fprintf(stderr, "%s is of type boolean. Must be number for comparison. Line: %d\n", $1->name, inputLineNumber);
 			if ($3->type == BOOLEAN)
-				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+				fprintf(stderr, "%s is of type boolean. Must be number for comparison. Line: %d\n", $3->name, inputLineNumber);
 			YYABORT;
 		}
 		$$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
@@ -123,9 +124,9 @@ E:  E BIG E
 		if ($1->type == BOOLEAN || $3->type == BOOLEAN)
 		{
 			if ($1->type == BOOLEAN)
-				fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+				fprintf(stderr, "%s is of type boolean. Must be number for comparison. Line: %d\n", $1->name, inputLineNumber);
 			if ($3->type == BOOLEAN)
-				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+				fprintf(stderr, "%s is of type boolean. Must be number for comparison. Line: %d\n", $3->name, inputLineNumber);
 			YYABORT;
 		}
 		$$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
@@ -137,13 +138,13 @@ E:  E BIG E
       if (! ($1->type == BOOLEAN) || ! ($3->type == BOOLEAN))
       {
           if ($1->type == REAL)
-              fprintf(stderr, "%s is of type float. Line: %d\n", $1->name, inputLineNumber);
+              fprintf(stderr, "%s is of type float. Must be boolean. Line: %d\n", $1->name, inputLineNumber);
           if ($3->type == REAL)
-              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+              fprintf(stderr, "%s is of type float. Must be boolean. Line: %d\n", $3->name, inputLineNumber);
           if ($1->type == INTEGER)
-              fprintf(stderr, "%s is of type integer. Line: %d\n", $1->name, inputLineNumber);
+              fprintf(stderr, "%s is of type integer. Must be boolean. Line: %d\n", $1->name, inputLineNumber);
           if ($3->type == INTEGER)
-              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+              fprintf(stderr, "%s is of type float. Must be boolean. Line: %d\n", $3->name, inputLineNumber);
           YYABORT;
       }
       $$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
@@ -154,13 +155,13 @@ E:  E BIG E
       if (! ($1->type == BOOLEAN) || ! ($3->type == BOOLEAN))
       {
           if ($1->type == REAL)
-              fprintf(stderr, "%s is of type float. Line: %d\n", $1->name, inputLineNumber);
+              fprintf(stderr, "%s is of type float. Must be boolean. Line: %d\n", $1->name, inputLineNumber);
           if ($3->type == REAL)
-              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+              fprintf(stderr, "%s is of type float. Must be boolean. Line: %d\n", $3->name, inputLineNumber);
           if ($1->type == INTEGER)
-              fprintf(stderr, "%s is of type integer. Line: %d\n", $1->name, inputLineNumber);
+              fprintf(stderr, "%s is of type integer. Must be boolean. Line: %d\n", $1->name, inputLineNumber);
           if ($3->type == INTEGER)
-              fprintf(stderr, "%s is of type float. Line: %d\n", $3->name, inputLineNumber);
+              fprintf(stderr, "%s is of type float. Must be boolean. Line: %d\n", $3->name, inputLineNumber);
           YYABORT;
       }
       $$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
@@ -170,9 +171,9 @@ E:  E BIG E
       if ( $2->type != BOOLEAN)
       {
           if ($2->type == REAL)
-              fprintf(stderr, "%s is of type float. Line: %d\n", $2->name, inputLineNumber);
+              fprintf(stderr, "%s is of type float. Must be boolean. Line: %d\n", $2->name, inputLineNumber);
           if ($2->type == INTEGER)
-              fprintf(stderr, "%s is of type integer. Line: %d\n", $2->name, inputLineNumber);
+              fprintf(stderr, "%s is of type integer. Must be boolean. Line: %d\n", $2->name, inputLineNumber);
           YYABORT;
       }
       $$ = addEntryToSymbolTable(getName(), BOOLEAN, inputLineNumber);
@@ -182,9 +183,9 @@ E:  E BIG E
 		if ($1->type == BOOLEAN || $3->type == BOOLEAN)
 		{
 			if ($1->type == BOOLEAN)
-				fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+				fprintf(stderr, "%s is of type boolean. Must be number for calculation. Line: %d\n", $1->name, inputLineNumber);
 			if ($3->type == BOOLEAN)
-				fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+				fprintf(stderr, "%s is of type boolean. Must be number for calculation. Line: %d\n", $3->name, inputLineNumber);
 			YYABORT;
 		}
 		$$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
@@ -194,9 +195,9 @@ E:  E BIG E
       if ($1->type == BOOLEAN || $3->type == BOOLEAN)
       {
           if ($1->type == BOOLEAN)
-              fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+              fprintf(stderr, "%s is of type boolean. Must be number for calculation. Line: %d\n", $1->name, inputLineNumber);
           if ($3->type == BOOLEAN)
-              fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+              fprintf(stderr, "%s is of type boolean. Must be number for calculation. Line: %d\n", $3->name, inputLineNumber);
           YYABORT;
       }
       $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
@@ -206,9 +207,9 @@ E:  E BIG E
       if ($1->type == BOOLEAN || $3->type == BOOLEAN)
       {
           if ($1->type == BOOLEAN)
-              fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+              fprintf(stderr, "%s is of type boolean. Must be number for calculation. Line: %d\n", $1->name, inputLineNumber);
           if ($3->type == BOOLEAN)
-              fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+              fprintf(stderr, "%s is of type boolean. Must be number for calculation. Line: %d\n", $3->name, inputLineNumber);
           YYABORT;
       }
       $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
@@ -218,9 +219,9 @@ E:  E BIG E
       if ($1->type == BOOLEAN || $3->type == BOOLEAN)
       {
           if ($1->type == BOOLEAN)
-              fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+              fprintf(stderr, "%s is of type boolean. Must be number for calculation. Line: %d\n", $1->name, inputLineNumber);
           if ($3->type == BOOLEAN)
-              fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+              fprintf(stderr, "%s is of type boolean. Must be number for calculation. Line: %d\n", $3->name, inputLineNumber);
           YYABORT;
       }
       $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
@@ -230,10 +231,10 @@ E:  E BIG E
       if ($1->type == BOOLEAN || $3->type == BOOLEAN)
       {
           if ($1->type == BOOLEAN)
-              fprintf(stderr, "%s is of type boolean. Line: %d\n", $1->name, inputLineNumber);
+              fprintf(stderr, "%s is of type boolean. Must be number for calculation. Line: %d\n", $1->name, inputLineNumber);
 
           if ($3->type == BOOLEAN)
-              fprintf(stderr, "%s is of type boolean. Line: %d\n", $3->name, inputLineNumber);
+              fprintf(stderr, "%s is of type boolean. Must be number for calculation. Line: %d\n", $3->name, inputLineNumber);
           YYABORT;
       }
       $$ = addEntryToSymbolTable(getName(), getType($1, $3), inputLineNumber);
