@@ -16,7 +16,6 @@
  * [defined in file compiler.l]
  */
 extern int inputLineNumber;
-int helperCounter;
 
 /**
  * Variable to enable/disable debug mode<BR>
