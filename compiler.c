@@ -45,12 +45,6 @@ void yyerror(const char* str)
             inputLineNumber, str);
 }
 
-char* helperVariableCounter(){
-    char* h = malloc(sizeof(char)*10);
-    sprintf(h, "_h%i", helperCounter);
-    helperCounter++;
-    return h;
-}
 dataType getType(symbolTableEntry *firstEntry, symbolTableEntry *secondEntry) {
 
 	if (firstEntry->type == BOOLEAN && secondEntry->type == BOOLEAN) {

@@ -22,7 +22,7 @@ extern int debug;
  * [defined in file compiler.l]
  */
 extern int inputLineNumber;
-int helperCounter;
+int helperCounter = 0;
 
 
 /**
